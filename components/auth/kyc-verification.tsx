@@ -124,7 +124,7 @@ export function KycVerification({ onBack, onComplete }: KycVerificationProps) {
     <div className="min-h-screen gradient-bg-subtle flex items-center justify-center p-4">
       <div className="w-full max-w-2xl">
         {/* Back Button */}
-        <Link variant="ghost" className="mb-6 text-muted-foreground hover:text-foreground" onClick={onBack}>
+        <Button variant="ghost" className="mb-6 text-muted-foreground hover:text-foreground" onClick={onBack}>
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back
         </Button>
