@@ -504,7 +504,12 @@ export default function BillPayment() {
                         </div>
                         <div className="text-right">
                           <p className="font-semibold">৳{payment.amount.toLocaleString()}</p>
-                          <Badge variant={payment.status === "completed" ? "default" : "secondary"} className="text-xs">
+                          <Badge
+                            variant={payment.status === "completed" ? "default" : "secondary"}
+                            className={
+                              payment.status === "completed" ? "bg-emerald-600 text-white" : "bg-gray-600 text-white"
+                            }
+                          >
                             {payment.status}
                           </Badge>
                         </div>

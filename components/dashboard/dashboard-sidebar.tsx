@@ -19,7 +19,11 @@ import {
   Building,
   Wallet,
   Banknote,
+  QrCode,
+  Users,
+  Calculator,
 } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 interface DashboardSidebarProps {
   activeView: string
@@ -29,66 +33,99 @@ interface DashboardSidebarProps {
 }
 
 export function DashboardSidebar({ activeView, onViewChange, isOpen, onToggle }: DashboardSidebarProps) {
+  const router = useRouter()
+
   const menuItems = [
     {
       id: "dashboard",
       label: "Dashboard",
       icon: Home,
       badge: null,
+      route: "/dashboard",
     },
     {
       id: "services",
       label: "All Services",
       icon: Building,
       badge: null,
+      route: "/services",
     },
     {
       id: "accounts",
       label: "Accounts",
       icon: Wallet,
       badge: null,
+      route: "/dashboard",
     },
     {
       id: "transfers",
-      label: "Transfers",
+      label: "Fund Transfers",
       icon: ArrowLeftRight,
       badge: null,
+      route: "/transfers",
     },
     {
       id: "payments",
       label: "Bill Payments",
       icon: Receipt,
       badge: "3",
+      route: "/bill-payment",
     },
     {
-      id: "credit-cards",
-      label: "Credit Cards",
-      icon: CreditCard,
-      badge: "2",
+      id: "qr-payments",
+      label: "QR Payments",
+      icon: QrCode,
+      badge: null,
+      route: "/qr-payments",
+    },
+    {
+      id: "qr-transfer",
+      label: "QR Transfer",
+      icon: Smartphone,
+      badge: null,
+      route: "/qr-transfer",
+    },
+    {
+      id: "beneficiaries",
+      label: "Beneficiaries",
+      icon: Users,
+      badge: null,
+      route: "/beneficiaries",
     },
     {
       id: "loans",
-      label: "Loans & EMI",
+      label: "Online Loan",
       icon: Banknote,
       badge: "3",
+      route: "/online-loan",
+    },
+    {
+      id: "emi",
+      label: "EMI Tracking",
+      icon: Calculator,
+      badge: null,
+      route: "/emi-tracking",
     },
     {
       id: "deposits",
       label: "FDR & DPS",
       icon: PiggyBank,
       badge: null,
+      route: "/fdr-dps",
     },
     {
       id: "investments",
-      label: "Investments",
+      label: "Shonchoy Potro",
       icon: TrendingUp,
       badge: null,
+      route: "/shonchoy-potro",
     },
     {
       id: "statements",
       label: "Statements",
       icon: FileText,
       badge: null,
+      route: "/dashboard",
     },
   ]
 
@@ -104,6 +141,18 @@ export function DashboardSidebar({ activeView, onViewChange, isOpen, onToggle }:
       icon: HelpCircle,
     },
   ]
+
+  const handleMenuClick = (item: any) => {
+    onViewChange(item.id)
+    if (item.route) {
+      router.push(item.route)
+    }
+    if (window.innerWidth < 1024) onToggle()
+  }
+
+  const handleLogout = () => {
+    router.push("/")
+  }
 
   return (
     <>
@@ -148,10 +197,7 @@ export function DashboardSidebar({ activeView, onViewChange, isOpen, onToggle }:
                   key={item.id}
                   variant={isActive ? "default" : "ghost"}
                   className={`w-full justify-start h-12 ${isActive ? "gradient-bg text-white" : "hover:bg-accent/50"}`}
-                  onClick={() => {
-                    onViewChange(item.id)
-                    if (window.innerWidth < 1024) onToggle()
-                  }}
+                  onClick={() => handleMenuClick(item)}
                 >
                   <Icon className="w-5 h-5 mr-3" />
                   <span className="flex-1 text-left">{item.label}</span>
@@ -170,13 +216,23 @@ export function DashboardSidebar({ activeView, onViewChange, isOpen, onToggle }:
             <div className="space-y-2 mb-4">
               <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Quick Access</p>
               <div className="grid grid-cols-2 gap-2">
-                <Button variant="outline" size="sm" className="glass bg-transparent">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="glass bg-transparent"
+                  onClick={() => router.push("/qr-payments")}
+                >
                   <Smartphone className="w-4 h-4 mr-2" />
-                  Mobile
+                  QR Pay
                 </Button>
-                <Button variant="outline" size="sm" className="glass bg-transparent">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="glass bg-transparent"
+                  onClick={() => router.push("/transfers")}
+                >
                   <Building className="w-4 h-4 mr-2" />
-                  Branch
+                  Transfer
                 </Button>
               </div>
             </div>
@@ -200,7 +256,11 @@ export function DashboardSidebar({ activeView, onViewChange, isOpen, onToggle }:
                   </Button>
                 )
               })}
-              <Button variant="ghost" className="w-full justify-start h-10 text-destructive hover:bg-destructive/10">
+              <Button
+                variant="ghost"
+                className="w-full justify-start h-10 text-destructive hover:bg-destructive/10"
+                onClick={handleLogout}
+              >
                 <LogOut className="w-4 h-4 mr-3" />
                 Sign Out
               </Button>

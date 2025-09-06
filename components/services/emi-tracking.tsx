@@ -83,13 +83,13 @@ export default function EMITracking() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "active":
-        return "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
+        return "bg-emerald-600 text-white border-emerald-600"
       case "overdue":
-        return "bg-red-500/20 text-red-400 border-red-500/30"
+        return "bg-red-600 text-white border-red-600"
       case "completed":
-        return "bg-blue-500/20 text-blue-400 border-blue-500/30"
+        return "bg-blue-600 text-white border-blue-600"
       default:
-        return "bg-gray-500/20 text-gray-400 border-gray-500/30"
+        return "bg-gray-600 text-white border-gray-600"
     }
   }
 

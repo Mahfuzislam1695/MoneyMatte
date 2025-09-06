@@ -529,8 +529,13 @@ export default function QRPaymentScanner() {
                         </div>
                       </div>
                       <div className="text-right">
-                        <p className="font-semibold text-blue-600">৳{payment.amount.toLocaleString()}</p>
-                        <Badge variant={payment.status === "completed" ? "default" : "secondary"} className="text-xs">
+                        <p className="font-semibold text-emerald-600">৳{payment.amount.toLocaleString()}</p>
+                        <Badge
+                          variant={payment.status === "completed" ? "default" : "secondary"}
+                          className={
+                            payment.status === "completed" ? "bg-emerald-600 text-white" : "bg-gray-600 text-white"
+                          }
+                        >
                           {payment.status}
                         </Badge>
                       </div>

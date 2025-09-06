@@ -76,19 +76,19 @@ export function RecentTransactions() {
     switch (status) {
       case "completed":
         return (
-          <Badge variant="default" className="bg-primary/10 text-primary border-primary/20">
+          <Badge variant="default" className="bg-emerald-600 text-white border-emerald-600">
             Completed
           </Badge>
         )
       case "pending":
         return (
-          <Badge variant="outline" className="border-yellow-600 text-yellow-600">
+          <Badge variant="outline" className="border-yellow-600 text-yellow-700 bg-yellow-50">
             Pending
           </Badge>
         )
       case "failed":
         return (
-          <Badge variant="destructive" className="bg-destructive/10 text-destructive border-destructive/20">
+          <Badge variant="destructive" className="bg-red-600 text-white border-red-600">
             Failed
           </Badge>
         )

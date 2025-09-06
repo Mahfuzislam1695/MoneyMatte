@@ -15,11 +15,14 @@ import {
   Settings,
   Shield,
   BarChart3,
-  AlertTriangle,
   LogOut,
   Bell,
   Search,
   Building2,
+  Database,
+  UserCheck,
+  TrendingUp,
+  Lock,
 } from "lucide-react"
 import { useRouter } from "next/navigation"
 
@@ -41,20 +44,27 @@ export function AdminLayout({ children, userRole, currentPage = "dashboard" }: A
   ]
 
   const superAdminMenuItems = [
-    { id: "dashboard", label: "Super Admin Dashboard", icon: Home, href: "/admin/super-admin" },
+    { id: "super-admin", label: "Super Admin Dashboard", icon: Home, href: "/admin/super-admin" },
     { id: "users", label: "User & Role Management", icon: Users, href: "/admin/users" },
     { id: "system", label: "System Configuration", icon: Settings, href: "/admin/system" },
-    { id: "compliance", label: "Compliance & Risk", icon: Shield, href: "/admin/compliance" },
-    { id: "products", label: "Financial Products", icon: CreditCard, href: "/admin/products" },
+    { id: "compliance", label: "Compliance & Analytics", icon: Shield, href: "/admin/compliance" },
+    { id: "customers", label: "Customer Support", icon: UserCheck, href: "/admin/customers" },
+    { id: "kyc", label: "KYC Verification", icon: FileText, href: "/admin/kyc" },
+    { id: "loans", label: "Loan Management", icon: CreditCard, href: "/admin/loans" },
+    { id: "products", label: "Financial Products", icon: Database, href: "/admin/products" },
     { id: "merchants", label: "Merchant Management", icon: Building2, href: "/admin/merchants" },
     { id: "analytics", label: "Reports & Analytics", icon: BarChart3, href: "/admin/analytics" },
-    { id: "security", label: "Security & Infrastructure", icon: AlertTriangle, href: "/admin/security" },
+    { id: "security", label: "Security & Infrastructure", icon: Lock, href: "/admin/security" },
   ]
 
   const menuItems = userRole === "super-admin" ? superAdminMenuItems : adminMenuItems
 
   const handleLogout = () => {
     router.push("/admin/login")
+  }
+
+  const handleGoToApp = () => {
+    router.push("/dashboard")
   }
 
   const Sidebar = () => (
@@ -98,7 +108,16 @@ export function AdminLayout({ children, userRole, currentPage = "dashboard" }: A
         })}
       </nav>
 
-      <div className="p-4 border-t border-sidebar-border">
+      <div className="p-4 border-t border-sidebar-border space-y-2">
+        <Button
+          variant="outline"
+          className="w-full justify-start gap-3 text-sidebar-foreground border-sidebar-border bg-transparent"
+          onClick={handleGoToApp}
+        >
+          <TrendingUp className="w-5 h-5" />
+          Go to Main App
+        </Button>
+
         <Button
           variant="ghost"
           className="w-full justify-start gap-3 text-destructive hover:bg-destructive/10"
